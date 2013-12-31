@@ -238,6 +238,7 @@ def run_with_settings(image, args=[], env={}, ports=[],
             log.warning('Too many ports were allocated to this image.')
             break
         cmd += [ '-p', '%d:%d' % (allocated, target) ]
+        cmd += [ '-e', 'PORT=%d' % (target) ]
     argv = ['docker'] + cmd + [ image ] + [ arg for arg in args ]
     log.info('ARGV ' + ' '.join(str(arg) for arg in argv))
     return subprocess.Popen(argv)
